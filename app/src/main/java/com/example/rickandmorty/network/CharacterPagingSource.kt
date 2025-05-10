@@ -20,7 +20,7 @@ class CharacterPagingSource(private val apiService: ApiService) : PagingSource<I
         val currentPage = params.key ?: 1
 
         return try {
-            val response: CharacterResponse = apiService.getCharacters(currentPage) // Ensure proper type
+            val response: CharacterResponse = apiService.getCharacters(currentPage)
             val characters: List<Character> = response.results ?: emptyList()
             val nextPage: Int? = response.info.next?.substringAfter("page=", "")?.toIntOrNull()
 
