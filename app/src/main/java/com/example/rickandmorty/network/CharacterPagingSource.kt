@@ -3,10 +3,11 @@ package com.example.rickandmorty.network
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.rickandmorty.model.Character
-import com.example.rickandmorty.model.CharacterResponse
 import com.example.rickandmorty.network.ApiService
 import retrofit2.HttpException
 import java.io.IOException
+import com.example.rickandmorty.model.CharacterResponse
+
 
 class CharacterPagingSource(private val apiService: ApiService) : PagingSource<Int, Character>() {
     override fun getRefreshKey(state: PagingState<Int, Character>): Int? {
@@ -19,9 +20,9 @@ class CharacterPagingSource(private val apiService: ApiService) : PagingSource<I
         val currentPage = params.key ?: 1
 
         return try {
-            val response = apiService.getCharacters(currentPage).execute()
-            val characters = response.body()?.results ?: emptyList()
-            val nextPage = response.body()?.info?.next?.let { currentPage + 1 }
+            val response: CharacterResponse = apiService.getCharacters(currentPage) // Ensure proper type
+            val characters: List<Character> = response.results ?: emptyList()
+            val nextPage: Int? = response.info.next?.substringAfter("page=", "")?.toIntOrNull()
 
             LoadResult.Page(
                 data = characters,
@@ -34,4 +35,6 @@ class CharacterPagingSource(private val apiService: ApiService) : PagingSource<I
             LoadResult.Error(e)
         }
     }
+
+
 }
