@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="MainActivity">
+
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="RICK AND MORTY"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:fontFamily="@font/rickandmorty"
+        android:padding="16dp"/>
+
+    <!-- Search Bar (Optional) -->
+    <EditText
+        android:id="@+id/searchInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Search character..."
+        android:padding="8dp"
+        android:fontFamily="@font/rowdies"
+        android:background="@android:color/white" />
+
+    <!-- RecyclerView for Character List -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fontFamily="@font/rowdies"
+        android:padding="8dp"
+        android:scrollbars="vertical" />
+
+</LinearLayout>
