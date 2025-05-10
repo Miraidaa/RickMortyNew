@@ -10,7 +10,7 @@ import com.example.rickandmorty.model.Character
 import com.example.rickandmorty.network.ApiService
 import com.example.rickandmorty.network.CharacterPagingSource
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.cachedIn
+
 
 class CharacterViewModel(private val apiService: ApiService) : ViewModel() {
 
