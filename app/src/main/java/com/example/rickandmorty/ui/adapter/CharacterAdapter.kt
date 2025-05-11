@@ -17,6 +17,7 @@ import com.example.rickandmorty.ProfileActivity
 class CharacterAdapter(private val characterList: List<Character>) :
     RecyclerView.Adapter<CharacterAdapter.ViewHolder>() {
 
+
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.characterName)
         val species: TextView = itemView.findViewById(R.id.characterSpecies)

@@ -9,9 +9,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmorty.model.Character
 import com.example.rickandmorty.model.CharacterResponse
 import com.example.rickandmorty.network.RetrofitClient
@@ -20,9 +17,13 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 
 class MainActivity : AppCompatActivity() {
+
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var searchInput: EditText
@@ -73,26 +74,26 @@ class MainActivity : AppCompatActivity() {
     private fun updatePaginationControls(currentPage: Int) {
         pageContainer.removeAllViews()
 
-        // Create "Prev" button if not on first page
+
         if (currentPage > 1) {
             val prevButton = Button(this)
-            prevButton.text = "Prev"
+            prevButton.text = "prev"
             prevButton.setOnClickListener {
                 fetchCharacters(currentPage - 1)
             }
             pageContainer.addView(prevButton)
         }
 
-        // Show the current page number
+
         val currentPageText = TextView(this)
-        currentPageText.text = "Page $currentPage of $totalPages"
+        currentPageText.text = "page $currentPage of $totalPages"
         currentPageText.textSize = 18f
         pageContainer.addView(currentPageText)
 
-        // Create "Next" button if not on last page
+
         if (currentPage < totalPages) {
             val nextButton = Button(this)
-            nextButton.text = "Next"
+            nextButton.text = "next"
             nextButton.setOnClickListener {
                 fetchCharacters(currentPage + 1)
             }
@@ -153,6 +154,12 @@ class MainActivity : AppCompatActivity() {
 
         Log.d("MainActivity", "Filtered List Size: ${filteredList.size}")
 
+        if (filteredList.isEmpty()) {
+            findViewById<TextView>(R.id.noResultsText).visibility = View.VISIBLE
+        } else {
+            findViewById<TextView>(R.id.noResultsText).visibility = View.GONE
+        }
+        
         val filteredAdapter = CharacterAdapter(filteredList)
         recyclerView.adapter = filteredAdapter
     }
