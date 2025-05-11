@@ -8,12 +8,17 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.tracing.perfetto.handshake.protocol.Response
 import com.bumptech.glide.Glide
 import com.example.rickandmorty.R
 import com.example.rickandmorty.model.Character
 import com.example.rickandmorty.network.RetrofitClient
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Callback
+
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -51,18 +56,13 @@ class ProfileActivity : AppCompatActivity() {
                     nameView.text = character.name
                     speciesView.text = character.species
                     statusView.text = character.status
-                    Glide.with(avatarView.context).load(character.image).into(avatarView)
+                    Glide.with(this@ProfileActivity).load(character.image).into(avatarView)
                 }
             }
 
             override fun onFailure(call: retrofit2.Call<Character>, t: Throwable) {
-                Toast.makeText(avatarView.context, "Failed to load data", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@ProfileActivity, "Failed to load data", Toast.LENGTH_SHORT).show()
             }
-
-
         })
     }
-
-
 }
-

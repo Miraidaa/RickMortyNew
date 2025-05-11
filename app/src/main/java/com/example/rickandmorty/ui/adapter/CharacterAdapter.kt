@@ -14,14 +14,8 @@ import com.example.rickandmorty.R
 import com.example.rickandmorty.model.Character
 import com.example.rickandmorty.ProfileActivity
 
-class CharacterAdapter : PagingDataAdapter<Character, CharacterAdapter.ViewHolder>(DIFF_CALLBACK) {
-
-    companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Character>() {
-            override fun areItemsTheSame(oldItem: Character, newItem: Character) = oldItem.id == newItem.id
-            override fun areContentsTheSame(oldItem: Character, newItem: Character) = oldItem == newItem
-        }
-    }
+class CharacterAdapter(private val characterList: List<Character>) :
+    RecyclerView.Adapter<CharacterAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.characterName)
@@ -29,18 +23,16 @@ class CharacterAdapter : PagingDataAdapter<Character, CharacterAdapter.ViewHolde
         val status: TextView = itemView.findViewById(R.id.characterStatus)
         val avatar: ImageView = itemView.findViewById(R.id.characterAvatar)
 
-        fun bind(character: Character?) {
-            character?.let {
-                name.text = it.name
-                species.text = it.species
-                status.text = it.status
-                Glide.with(itemView.context).load(it.image).into(avatar)
+        fun bind(character: Character) {
+            name.text = character.name
+            species.text = character.species
+            status.text = character.status
+            Glide.with(itemView.context).load(character.image).into(avatar)
 
-                itemView.setOnClickListener {
-                    val intent = Intent(itemView.context, ProfileActivity::class.java)
-                    intent.putExtra("characterId", it.id)
-                    itemView.context.startActivity(intent)
-                }
+            itemView.setOnClickListener {
+                val intent = Intent(itemView.context, ProfileActivity::class.java)
+                intent.putExtra("characterId", character.id)
+                itemView.context.startActivity(intent)
             }
         }
     }
@@ -52,6 +44,8 @@ class CharacterAdapter : PagingDataAdapter<Character, CharacterAdapter.ViewHolde
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(characterList[position])
     }
+
+    override fun getItemCount(): Int = characterList.size
 }
