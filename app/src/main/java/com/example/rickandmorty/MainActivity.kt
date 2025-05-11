@@ -143,17 +143,18 @@ class MainActivity : AppCompatActivity() {
     private fun filterCharacters(query: String) {
         Log.d("MainActivity", "Search Query: $query")
 
+        if (query.isEmpty()) {
+            recyclerView.adapter = adapter
+            return
+        }
+
         filteredList.clear()
         filteredList.addAll(allCharacters.filter { it.name.contains(query, ignoreCase = true) })
 
         Log.d("MainActivity", "Filtered List Size: ${filteredList.size}")
 
-        adapter = CharacterAdapter(filteredList)
-        recyclerView.adapter = adapter
+        val filteredAdapter = CharacterAdapter(filteredList)
+        recyclerView.adapter = filteredAdapter
     }
-
-
-
-
 
 }
