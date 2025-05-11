@@ -56,11 +56,12 @@ class MainActivity : AppCompatActivity() {
 
         fetchCharacters(currentPage)
 
-
-
-
         searchInput.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
+                if (!isStrictCharacterName(s.toString())) {
+                    searchInput.error = "Name must contain only letters!"
+                }
+
                 filterCharacters(s.toString())
             }
 
@@ -71,6 +72,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    fun isStrictCharacterName(name: String): Boolean {
+        return name.matches(Regex("^[A-Za-z]+$"))
+    }
     private fun updatePaginationControls(currentPage: Int) {
         pageContainer.removeAllViews()
 
