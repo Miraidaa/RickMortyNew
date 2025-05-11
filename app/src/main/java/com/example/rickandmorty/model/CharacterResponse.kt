@@ -11,3 +11,5 @@ data class PageInfo(
     val next: String?,
     val prev: String?
 )
+
+
