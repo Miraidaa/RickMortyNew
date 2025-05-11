@@ -48,7 +48,6 @@ class MainActivity : AppCompatActivity() {
 
 
         recyclerView.layoutManager = LinearLayoutManager(this)
-        //adapter = CharacterAdapter(filteredList)
         adapter = CharacterAdapter(characterList)
         recyclerView.adapter = adapter
         recyclerView.visibility = View.VISIBLE
@@ -61,7 +60,7 @@ class MainActivity : AppCompatActivity() {
 
         searchInput.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                filterCharacters(s.toString()) // Ensure filtering happens
+                filterCharacters(s.toString())
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -104,7 +103,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    private var totalPages = 1 // Default value
+    private var totalPages = 1
 
     private fun fetchCharacters(page: Int) {
         isLoading = true
@@ -112,20 +111,19 @@ class MainActivity : AppCompatActivity() {
         RetrofitClient.instance.getCharacters(page).enqueue(object : Callback<CharacterResponse> {
             override fun onResponse(call: Call<CharacterResponse>, response: Response<CharacterResponse>) {
                 response.body()?.let {
-                    totalPages = it.info.pages // Update total page count dynamically
+                    totalPages = it.info.pages
 
                     if (page == 1) {
-                        allCharacters.clear() // Clear only when loading the first page
+                        allCharacters.clear()
                     }
 
-                    allCharacters.addAll(it.results) // 🔥 Store ALL characters across pages!
+                    allCharacters.addAll(it.results)
 
-                    // Update only current page for display
                     characterList.clear()
                     characterList.addAll(it.results)
                     adapter.notifyDataSetChanged()
 
-                    updatePaginationControls(page) // Refresh Prev/Next buttons
+                    updatePaginationControls(page)
                 }
                 isLoading = false
             }
@@ -143,15 +141,15 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun filterCharacters(query: String) {
-        Log.d("MainActivity", "Search Query: $query") // Debugging log
+        Log.d("MainActivity", "Search Query: $query")
 
         filteredList.clear()
-        filteredList.addAll(allCharacters.filter { it.name.contains(query, ignoreCase = true) }) // 🔥 Search across ALL pages
+        filteredList.addAll(allCharacters.filter { it.name.contains(query, ignoreCase = true) })
 
-        Log.d("MainActivity", "Filtered List Size: ${filteredList.size}") // Debugging log
+        Log.d("MainActivity", "Filtered List Size: ${filteredList.size}")
 
-        adapter = CharacterAdapter(filteredList) // Refresh adapter with filtered results
-        recyclerView.adapter = adapter // Ensure RecyclerView updates
+        adapter = CharacterAdapter(filteredList)
+        recyclerView.adapter = adapter
     }
 
 
