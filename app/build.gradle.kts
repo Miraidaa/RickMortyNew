@@ -70,6 +70,12 @@ dependencies {
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
     implementation ("androidx.appcompat:appcompat:1.6.1")
     implementation ("androidx.recyclerview:recyclerview:1.3.0")
+    testImplementation ("junit:junit:4.13.2")
+    androidTestImplementation ("androidx.test.espresso:espresso-core:3.4.0")
+    testImplementation ("junit:junit:4.13.2")
+    testImplementation ("org.mockito:mockito-core:4.8.0")
+    testImplementation ("org.mockito.kotlin:mockito-kotlin:4.1.0")
+    androidTestImplementation ("org.mockito:mockito-android:4.8.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -77,6 +83,7 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    implementation(kotlin("test"))
 }
 
 private fun DependencyHandlerScope.kapt(string: String) {}
