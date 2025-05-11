@@ -12,7 +12,11 @@ Welcome to the **Rick and Morty Character Explorer**! This Android app allows us
 
 ## 📷 Screenshots  
 https://github.com/Miraidaa/RickMortyNew/blob/main/app/screenshots/Screenshot%202025-05-11%20123218.png
-
+https://github.com/Miraidaa/RickMortyNew/blob/main/app/screenshots/Screenshot%202025-05-11%20123315.png
+https://github.com/Miraidaa/RickMortyNew/blob/main/app/screenshots/Screenshot%202025-05-11%20123445.png
+https://github.com/Miraidaa/RickMortyNew/blob/main/app/screenshots/Screenshot%202025-05-11%20123527.png
+https://github.com/Miraidaa/RickMortyNew/blob/main/app/screenshots/Screenshot%202025-05-11%20124004.png
+https://github.com/Miraidaa/RickMortyNew/blob/main/app/screenshots/Screenshot%202025-05-11%20125304.png
 
 ---
 
