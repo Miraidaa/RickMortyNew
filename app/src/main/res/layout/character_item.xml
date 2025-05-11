@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
     android:orientation="horizontal"
-    android:padding="8dp"
-    android:background="?android:attr/selectableItemBackground">
+    android:padding="8dp">
 
 
     <ImageView
@@ -25,26 +25,26 @@
             android:id="@+id/characterName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black"
             android:fontFamily="@font/rowdies"
-            android:paddingBottom="4dp" />
+            android:paddingBottom="4dp"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/characterSpecies"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="10sp"
-            android:textColor="@android:color/darker_gray" />
+            android:textColor="@android:color/darker_gray"
+            android:textSize="10sp" />
 
         <TextView
             android:id="@+id/characterStatus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="10sp"
             android:fontFamily="@font/rowdies"
-            android:textColor="@android:color/darker_gray" />
+            android:textColor="@android:color/darker_gray"
+            android:textSize="10sp" />
     </LinearLayout>
 
 </LinearLayout>

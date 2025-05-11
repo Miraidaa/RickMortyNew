@@ -33,7 +33,13 @@ class ProfileActivity : AppCompatActivity() {
         val characterAvatar = findViewById<ImageView>(R.id.characterAvatar)
         val backButton = findViewById<Button>(R.id.backButton)
 
-        fetchCharacterDetails(characterId, characterName, characterSpecies, characterStatus, characterAvatar)
+        fetchCharacterDetails(
+            characterId,
+            characterName,
+            characterSpecies,
+            characterStatus,
+            characterAvatar
+        )
 
         backButton.setOnClickListener {
             finish()
@@ -61,7 +67,8 @@ class ProfileActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: retrofit2.Call<Character>, t: Throwable) {
-                Toast.makeText(this@ProfileActivity, "Failed to load data", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@ProfileActivity, "Failed to load data", Toast.LENGTH_SHORT)
+                    .show()
             }
         })
     }

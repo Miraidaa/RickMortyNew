@@ -8,7 +8,11 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmorty.model.Character
 import com.example.rickandmorty.model.CharacterResponse
 import com.example.rickandmorty.network.RetrofitClient
@@ -16,10 +20,6 @@ import com.example.rickandmorty.ui.adapter.CharacterAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity() {
     private var allCharacters = mutableListOf<Character>()
 
 
-
     private var currentPage = 1
     private var isLoading = false
     private lateinit var pageContainer: LinearLayout
@@ -42,11 +41,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         recyclerView = findViewById(R.id.recyclerView)
         searchInput = findViewById(R.id.searchInput)
         pageContainer = findViewById(R.id.pageContainer)
-
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = CharacterAdapter(characterList)
@@ -75,6 +72,8 @@ class MainActivity : AppCompatActivity() {
     fun isStrictCharacterName(name: String): Boolean {
         return name.matches(Regex("^[A-Za-z]+$"))
     }
+
+
     private fun updatePaginationControls(currentPage: Int) {
         pageContainer.removeAllViews()
 
@@ -106,15 +105,16 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-
     private var totalPages = 1
 
     private fun fetchCharacters(page: Int) {
         isLoading = true
 
         RetrofitClient.instance.getCharacters(page).enqueue(object : Callback<CharacterResponse> {
-            override fun onResponse(call: Call<CharacterResponse>, response: Response<CharacterResponse>) {
+            override fun onResponse(
+                call: Call<CharacterResponse>,
+                response: Response<CharacterResponse>
+            ) {
                 response.body()?.let {
                     totalPages = it.info.pages
 
@@ -135,14 +135,11 @@ class MainActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<CharacterResponse>, t: Throwable) {
                 isLoading = false
-                Toast.makeText(this@MainActivity, "Failed to load characters", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity, "Failed to load characters", Toast.LENGTH_SHORT)
+                    .show()
             }
         })
     }
-
-
-
-
 
 
     private fun filterCharacters(query: String) {
@@ -163,7 +160,7 @@ class MainActivity : AppCompatActivity() {
         } else {
             findViewById<TextView>(R.id.noResultsText).visibility = View.GONE
         }
-        
+
         val filteredAdapter = CharacterAdapter(filteredList)
         recyclerView.adapter = filteredAdapter
     }

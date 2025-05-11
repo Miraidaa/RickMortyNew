@@ -20,7 +20,7 @@
         android:textStyle="bold" />
 
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/searchInput"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -29,8 +29,9 @@
         android:elevation="4dp"
         android:fontFamily="@font/rowdies"
         android:hint="Search character..."
-        android:textSize="15sp"
-        android:padding="8dp" />
+        android:padding="8dp"
+        android:textSize="15sp" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -47,12 +48,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.8"
+        android:gravity="center"
+        android:padding="16dp"
         android:text="Character not found"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:gravity="center"
-        android:visibility="gone"
-        android:padding="16dp"/>
+        android:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/pageContainer"
@@ -63,11 +64,8 @@
         android:animationCache="true"
         android:gravity="center"
         android:orientation="horizontal"
-        android:textSize="10sp"
-        android:padding="10dp"></LinearLayout>
-
-
-
+        android:padding="10dp"
+        android:textSize="10sp"></LinearLayout>
 
 
 </LinearLayout>

@@ -6,13 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.paging.PagingDataAdapter
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.rickandmorty.ProfileActivity
 import com.example.rickandmorty.R
 import com.example.rickandmorty.model.Character
-import com.example.rickandmorty.ProfileActivity
 
 class CharacterAdapter(private val characterList: List<Character>) :
     RecyclerView.Adapter<CharacterAdapter.ViewHolder>() {
@@ -39,8 +37,8 @@ class CharacterAdapter(private val characterList: List<Character>) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.character_item, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.character_item, parent, false)
         return ViewHolder(view)
     }
 
